@@ -1,0 +1,407 @@
+<?xml version="1.0"?>
+<!-- 
+    Notes:
+        Useful magic numbers:
+            45                      0.785
+            90degrees for RPY is    1.57
+
+ -->
+<robot name="nefive">
+
+    <!-- #region - Materials -->
+    <material name="red">
+        <color rgba="0.8 0 0 1"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0 0.8 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+    </material>
+
+    <material name="white">
+        <color rgba="0.8 0.8 0.8 1"/>
+    </material>
+    <!-- #endregion -->
+
+    <!-- #region - Chassis-->
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.105 0.146 0.068"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <!-- Drive sprockets -->
+    <link name="roll_M0_link">
+        <visual>
+            <origin rpy="1.57 0 0" xyz="-0.074 0.086 -0.017"/>
+            <geometry>
+                <cylinder radius="0.023" length="0.022"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+   
+    <joint name="roll_joint_M0" type="continuous">
+        <parent link="base_link"/>
+        <child link="roll_M0_link"/>
+        <origin xyz="0.0023 0 -0.0005" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="roll_M1_link">
+        <visual>
+            <origin rpy="1.57 0 0" xyz="-0.074 -0.086 -0.017"/>
+            <geometry>
+                <cylinder radius="0.023" length="0.022"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    
+    <joint name="roll_joint_M1" type="continuous">
+        <parent link="base_link"/>
+        <child link="roll_M1_link"/>
+        <origin xyz="0.0023 0 -0.0005" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+  
+
+    <!-- front idlers -->
+    <link name="roll_M0_idler_link">
+        <visual>
+            <!-- <origin rpy="1.57 0 0" xyz="-0.074 0.086 -0.017"/> -->
+            <origin rpy="1.57 0 0" xyz="0.074 0.086 -0.017"/>
+            <geometry>
+                <cylinder radius="0.023" length="0.022"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    
+    <joint name="roll_joint_M0_idler" type="continuous">
+        <parent link="base_link"/>
+        <child link="roll_M0_idler_link"/>
+        <origin xyz="0.0023 0 -0.0005" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="roll_M1_idler_link">
+        <visual>
+            <origin rpy="1.57 0 0" xyz="0.074 -0.086 -0.017"/>
+            <geometry>
+                <cylinder radius="0.023" length="0.022"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    
+    <joint name="roll_joint_M1_idler" type="continuous">
+        <parent link="base_link"/>
+        <child link="roll_M1_idler_link"/>
+        <origin xyz="0.0023 0 -0.0005" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+    <!-- #endregion -->
+
+    <!-- #region - Chest -->
+
+    <link name="lowertorso_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.06"/>
+            <geometry>
+                <box size="0.03 0.060 0.080"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="base_lowertorso_fixed" type="fixed">
+        <parent link="base_link"/>
+        <child link="lowertorso_link"/>
+        <origin xyz="0 0 0" rpy="0 -0.785 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+        <link name="uppertorso_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.04"/>
+            <geometry>
+                <box size="0.03 0.060 0.080"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="lowertorso_uppertorso_fixed" type="fixed">
+        <parent link="lowertorso_link"/>
+        <child link="uppertorso_link"/>
+        <origin xyz="0 0 0.09" rpy="0 1.57 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="chest_box_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.07 0 0.08"/>
+            <geometry>
+                <box size="0.048 0.060 0.044"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="base_chest_box_fixed" type="fixed">
+        <parent link="uppertorso_link"/>
+        <child link="chest_box_link"/>
+        <origin xyz="0 0 0" rpy="0 -0.785 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+    <!-- #endregion -->
+
+    <!-- #region - Head -->
+
+    <link name="head_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.072"/>
+            <geometry>
+                <box size="0.107 0.110 0.054"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="chest_box_head_fixed" type="fixed">
+        <parent link="chest_box_link"/>
+        <child link="head_link"/>
+        <origin xyz="0.08 0 0.1" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="eye_ring_left_link">
+        <visual>
+            <origin rpy="0 1.57 0" xyz="0.055 0.03 0.072"/>
+            <geometry>
+                <cylinder radius="0.021" length="0.010"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="head_eye_ring_left_fixed" type="fixed">
+        <parent link="head_link"/>
+        <child link="eye_ring_left_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="eye_ring_right_link">
+        <visual>
+            <origin rpy="0 1.57 0" xyz="0.055 -0.03 0.072"/>
+            <geometry>
+                <cylinder radius="0.021" length="0.010"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="head_eye_ring_right_fixed" type="fixed">
+        <parent link="head_link"/>
+        <child link="eye_ring_right_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="eye_ring_inner_left_link">
+        <visual>
+            <origin rpy="0 1.57 0" xyz="0.058 0.03 0.072"/>
+            <geometry>
+                <cylinder radius="0.01" length="0.010"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <joint name="head_eye_ring_inner_left_fixed" type="fixed">
+        <parent link="head_link"/>
+        <child link="eye_ring_inner_left_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="eye_ring_inner_right_link">
+        <visual>
+            <origin rpy="0 1.57 0" xyz="0.058 -0.03 0.072"/>
+            <geometry>
+                <cylinder radius="0.01" length="0.010"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+    <joint name="head_eye_ring_inner_right_fixed" type="fixed">
+        <parent link="head_link"/>
+        <child link="eye_ring_inner_right_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+    <!-- #endregion -->
+
+    <!-- #region - Arms -->
+    <!-- #region - Right Arm -->
+
+    <link name="right_shoulder_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.04 0.015 0.02"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="chest_box_right_shoulder_fixed" type="fixed">
+        <parent link="chest_box_link"/>
+        <child link="right_shoulder_link"/>
+        <origin xyz="0.08 -0.08 0.08" rpy="0 0.77 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="right_upperarm_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.051"/>
+            <geometry>
+                <box size="0.015 0.015 0.075"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="right_shoulder_upperarm_fixed" type="fixed">
+        <parent link="right_shoulder_link"/>
+        <child link="right_upperarm_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="right_forearm_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.051"/>
+            <geometry>
+                <box size="0.015 0.015 0.075"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="right_upperarm_forearm_fixed" type="fixed">
+        <parent link="right_upperarm_link"/>
+        <child link="right_forearm_link"/>
+        <origin xyz="0 0 -0.085" rpy="0 -2.3 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="right_hand_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.031"/>
+            <geometry>
+                <box size="0.035 0.035 0.035"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="right_forearm_hand_fixed" type="fixed">
+        <parent link="right_forearm_link"/>
+        <child link="right_hand_link"/>
+        <origin xyz="0 0 -0.076" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+    <!-- #endregion -->
+
+    <!-- #region - Left Arm -->
+
+    <link name="left_shoulder_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.04 0.015 0.02"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="chest_box_left_shoulder_fixed" type="fixed">
+        <parent link="chest_box_link"/>
+        <child link="left_shoulder_link"/>
+        <origin xyz="0.08 0.08 0.08" rpy="0 0.77 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="left_upperarm_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.051"/>
+            <geometry>
+                <box size="0.015 0.015 0.075"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="left_shoulder_upperarm_fixed" type="fixed">
+        <parent link="left_shoulder_link"/>
+        <child link="left_upperarm_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="left_forearm_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.051"/>
+            <geometry>
+                <box size="0.015 0.015 0.075"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="left_upperarm_forearm_fixed" type="fixed">
+        <parent link="left_upperarm_link"/>
+        <child link="left_forearm_link"/>
+        <origin xyz="0 0 -0.085" rpy="0 -2.3 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="left_hand_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.031"/>
+            <geometry>
+                <box size="0.035 0.035 0.035"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="left_forearm_hand_fixed" type="fixed">
+        <parent link="left_forearm_link"/>
+        <child link="left_hand_link"/>
+        <origin xyz="0 0 -0.076" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+    <!-- #endregion -->
+    <!-- #endregion -->
+
+</robot>
