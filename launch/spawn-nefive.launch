@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <include file="$(find nefive-core)/launch/spawn_urdf.launch">
+        <arg name="x" value="0.0" />
+        <arg name="y" value="0.0" />
+        <arg name="z" value="0.2" />
+        <arg 
+            name="urdf_robot_file"
+            value="$(find nefive-core)/urdf/nefive-unity.urdf"
+        />
+        <arg name="robot_name" value="nefive" />
+    </include>
+
+    <!-- <param name="robot_description" command="cat $(find nefive-core)/urdf/nefive-unity.urdf" /> -->
+
+    <!-- send fake joint values -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+    <!-- Combine joint values -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <!-- Show in Rviz   -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nefive-core)/rviz_config/nefive.rviz"/>
+</launch>

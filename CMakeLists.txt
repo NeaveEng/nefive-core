@@ -109,10 +109,17 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES nefive-core
-#  CATKIN_DEPENDS ros_redboard rospy rvix urdf xacro
-#  DEPENDS system_lib
+ INCLUDE_DIRS
+ LIBRARIES nefive-core
+ CATKIN_DEPENDS 
+  ros_redboard 
+  rospy 
+  rviz 
+  urdf 
+  xacro
+ DEPENDS 
+  system_lib
+  gazebo_ros
 )
 
 ###########
@@ -122,8 +129,10 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
+  include
+    ${catkin_INCLUDE_DIRS}
+    ${GAZEBO_INCLUDE_DIRS} 
+    ${SDFormat_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library

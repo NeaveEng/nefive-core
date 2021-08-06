@@ -1,17 +1,14 @@
 <launch>
 
   <!-- USE: roslaunch nefive-core urdf_visualize.launch model:='$(find nefive-core)/urdf/nefive.urdf' -->
-  <arg name="model" default=""/>
+  <arg name="model" default="nefive"/>
 
-
-  <param name="robot_description" command="cat $(find nefive-core)/urdf/nefive.urdf" />
+  <param name="robot_description" command="cat $(find nefive-core)/urdf/nefive-unity.urdf" />
 
   <!-- send fake joint values -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="TRUE"/>
-  </node>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 
-  
   <!-- Combine joint values -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
