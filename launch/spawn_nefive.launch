@@ -6,7 +6,7 @@
         <arg name="z" value="0.2" />
         <arg 
             name="urdf_robot_file"
-            value="$(find nefive-core)/urdf/nefive-unity.urdf"
+            value="/home/keegan/catkin_ws/src/nefive-core/urdf/nefive-unity.urdf"
         />
         <arg name="robot_name" value="nefive" />
     </include>
@@ -21,5 +21,5 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
     <!-- Show in Rviz   -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nefive-core)/rviz_config/nefive.rviz"/>
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nefive-core)/rviz_config/nefive.rviz"/> -->
 </launch>
