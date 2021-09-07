@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot name="nefive">
 
+<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>/nefive</robotNamespace>
+    </plugin>
+</gazebo>
+
 <gazebo reference="base_link">
     <kp>100000.0</kp>
     <kd>100000.0</kd>
@@ -15,6 +21,9 @@
   </material>
   <material name="black">
     <color rgba="0 0 0 1" />
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1" />
   </material>
   <material name="Default-Material">
     <color rgba="1 1 1 1" />
@@ -993,4 +1002,29 @@
     <parent link="left_wrist_pan" />
     <child link="left_hand" />
   </joint>
+
+<!-- Transmissions -->
+
+    <transmission name="head_pan_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="chest_box_head_pan_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_pan_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="head_tilt_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="head_pan_head_tilt_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="head_tilt_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
 </robot>
