@@ -8,7 +8,7 @@ project(nefive-core)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  ros_redboard
+#   ros_redboard
   rospy
   rviz
   urdf
@@ -112,7 +112,7 @@ catkin_package(
  INCLUDE_DIRS
  LIBRARIES nefive-core
  CATKIN_DEPENDS 
-  ros_redboard 
+#   ros_redboard 
   rospy 
   rviz 
   urdf 
