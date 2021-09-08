@@ -29,7 +29,8 @@
     <color rgba="1 1 1 1" />
   </material>
 
-<!-- Links -->
+
+<!-- #region - Links -->
 
   <link name="base_link">
   
@@ -770,8 +771,9 @@
     </visual>
   </link>
 
+<!-- #endregion -->
 
-<!-- Joints -->
+<!-- #region - Joints -->
 
   <joint name="base_link_rear_right_wheel_joint" type="continuous">
     <origin xyz="-0.07 -0.078 -0.022" />
@@ -1003,7 +1005,9 @@
     <child link="left_hand" />
   </joint>
 
-<!-- Transmissions -->
+<!-- #endregion -->
+
+<!-- #region - Transmissions -->
 
     <transmission name="head_pan_joint_tran">
         <type>transmission_interface/SimpleTransmission</type>
@@ -1026,5 +1030,152 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
+
+  <!-- right arm-->
+
+    <transmission name="right_arm_right_shoulder_tilt_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_arm_right_shoulder_tilt_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_arm_right_shoulder_tilt_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_shoulder_tilt_right_shoulder_pan_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_shoulder_tilt_right_shoulder_pan_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_shoulder_tilt_right_shoulder_pan_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_shoulder_pan_right_shoulder_rotate_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_shoulder_pan_right_shoulder_rotate_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_shoulder_pan_right_shoulder_rotate_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_shoulder_rotate_right_elbow_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_shoulder_rotate_right_elbow_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_shoulder_rotate_right_elbow_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_forearm_right_wrist_roll_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_forearm_right_wrist_roll_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_forearm_right_wrist_roll_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_wrist_roll_right_wrist_tilt_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_wrist_roll_right_wrist_tilt_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_wrist_roll_right_wrist_tilt_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="right_wrist_tilt_right_wrist_pan_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_wrist_tilt_right_wrist_pan_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_wrist_tilt_right_wrist_pan_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <!-- Left Arm -->
+    <transmission name="left_arm_left_shoulder_tilt_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_arm_left_shoulder_tilt_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_arm_left_shoulder_tilt_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_shoulder_tilt_left_shoulder_pan_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_shoulder_tilt_left_shoulder_pan_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_shoulder_tilt_left_shoulder_pan_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_shoulder_pan_left_shoulder_rotate_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_shoulder_pan_left_shoulder_rotate_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_shoulder_pan_left_shoulder_rotate_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_shoulder_rotate_left_elbow_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_shoulder_rotate_left_elbow_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_shoulder_rotate_left_elbow_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_forearm_left_wrist_roll_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_forearm_left_wrist_roll_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_forearm_left_wrist_roll_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_wrist_roll_left_wrist_tilt_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_wrist_roll_left_wrist_tilt_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_wrist_roll_left_wrist_tilt_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="left_wrist_tilt_left_wrist_pan_joint_tran">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_wrist_tilt_left_wrist_pan_joint">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_wrist_tilt_left_wrist_pan_joint_motor">
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+<!-- #endregion -->
 
 </robot>

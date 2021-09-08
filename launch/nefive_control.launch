@@ -5,7 +5,26 @@
   <!-- load the controllers -->
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/nefive" args="head_pan_joint_position_controller head_tilt_joint_position_controller joint_state_controller --shutdown-timeout 3"/>
+    output="screen" ns="/nefive" 
+    args="
+      head_pan_joint_position_controller 
+      head_tilt_joint_position_controller 
+      right_arm_right_shoulder_tilt_joint_position_controller
+      right_shoulder_tilt_right_shoulder_pan_joint_position_controller
+      right_shoulder_pan_right_shoulder_rotate_joint_position_controller
+      right_shoulder_rotate_right_elbow_joint_position_controller
+      right_forearm_right_wrist_roll_joint_position_controller
+      right_wrist_roll_right_wrist_tilt_joint_position_controller
+      right_wrist_tilt_right_wrist_pan_joint_position_controller
+      left_arm_left_shoulder_tilt_joint_position_controller
+      left_shoulder_tilt_left_shoulder_pan_joint_position_controller
+      left_shoulder_pan_left_shoulder_rotate_joint_position_controller
+      left_shoulder_rotate_left_elbow_joint_position_controller
+      left_forearm_left_wrist_roll_joint_position_controller
+      left_wrist_roll_left_wrist_tilt_joint_position_controller
+      left_wrist_tilt_left_wrist_pan_joint_position_controller
+      joint_state_controller"
+    />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
@@ -14,3 +33,5 @@
   </node>
 
 </launch>
+
+
