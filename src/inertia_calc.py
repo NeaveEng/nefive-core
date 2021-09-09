@@ -18,26 +18,26 @@ class InertialCalculator(object):
             print("[2]Sphere radius(r)")
             print("[3]Cylinder radius(r)*height(h)")
             print("[Q]END program")
-            selection = raw_input(">>")
+            selection = input(">>")
             self.select_action(selection)
 
         print("InertialCaluclator Quit...Thank you")
 
     def select_action(self, selection):
         if selection == "1":
-            mass = float(raw_input("mass>>"))
-            width = float(raw_input("width>>"))
-            depth = float(raw_input("depth>>"))
-            height = float(raw_input("height>>"))
+            mass = float(input("mass>>"))
+            width = float(input("width>>"))
+            depth = float(input("depth>>"))
+            height = float(input("height>>"))
             self.calculate_box_inertia(m=mass, w=width, d=depth, h=height)
         elif selection == "2":
-            mass = float(raw_input("mass>>"))
-            radius = float(raw_input("radius>>"))
+            mass = float(input("mass>>"))
+            radius = float(input("radius>>"))
             self.calculate_sphere_inertia(m=mass, r=radius)
         elif selection == "3":
-            mass = float(raw_input("mass>>"))
-            radius = float(raw_input("radius>>"))
-            height = float(raw_input("height>>"))
+            mass = float(input("mass>>"))
+            radius = float(input("radius>>"))
+            height = float(input("height>>"))
             self.calculate_cylinder_inertia(m=mass, r=radius, h=height)
         elif selection == "Q":
             print("Selected Quit")
