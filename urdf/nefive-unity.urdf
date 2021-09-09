@@ -33,8 +33,7 @@
 <!-- #region - Links -->
 
   <link name="base_link">
-  
-      <inertial>
+    <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.001" />
         <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
@@ -333,8 +332,7 @@
             <cylinder radius="0" length="0"/>
         </geometry>
     </visual>
-</link>
-
+  </link>
   <link name="left_eye_ring">
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -374,6 +372,13 @@
         <cylinder length="0.002" radius="0.01" />
       </geometry>
     </collision>
+  </link>
+  <link name="left_camera">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.001" />
+        <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
+    </inertial>
   </link>
   <link name="right_eye_ring">
       <inertial>
@@ -415,6 +420,14 @@
       </geometry>
     </collision>
   </link>
+  <link name="right_camera">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.001" />
+        <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
+    </inertial>
+  </link>
+
   <link name="arms">
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -422,6 +435,8 @@
         <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
     </inertial>
   </link>
+
+  <!-- Right Arm -->
   <link name="right_arm" >
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -587,7 +602,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.001" />
-        <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
+        <inertia ixx="2.9333333333333333e-06" ixy="0.0" ixz="0.0" iyy="2.9333333333333333e-06" iyz="0.0" izz="2.9333333333333333e-06"/>
     </inertial>
     <visual>
       <geometry>
@@ -596,6 +611,8 @@
       <material name="grey" />
     </visual>
   </link>
+
+  <!-- Left Arm -->
   <link name="left_arm" >
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -761,7 +778,7 @@
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="0.001" />
-        <inertia ixx="0.0002835" ixy="0.0" ixz="0.0" iyy="0.0002835" iyz="0.0" izz="0.000324"/>
+        <inertia ixx="2.9333333333333333e-06" ixy="0.0" ixz="0.0" iyy="2.9333333333333333e-06" iyz="0.0" izz="2.9333333333333333e-06"/>
     </inertial>
     <visual>
       <geometry>
@@ -858,6 +875,10 @@
     <parent link="left_eye_ring" />
     <child link="left_eye_inner" />
   </joint>
+  <joint name="left_eye_inner_left_camera_joint" type="fixed">
+    <parent link="left_eye_inner" />
+    <child link="left_camera" />
+  </joint>
   <joint name="eyes_right_eye_ring_joint" type="fixed">
     <origin xyz="0 -0.03 0" />
     <parent link="eyes" />
@@ -866,6 +887,10 @@
   <joint name="right_eye_ring_right_eye_inner_joint" type="fixed">
     <parent link="right_eye_ring" />
     <child link="right_eye_inner" />
+  </joint>
+  <joint name="right_eye_inner_right_camera_joint" type="fixed">
+    <parent link="right_eye_inner" />
+    <child link="right_camera" />
   </joint>
   <joint name="chest_box_arms_joint" type="fixed">
     <origin xyz="0.025 0 0.075" />
@@ -1175,6 +1200,89 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
+
+<!-- #endregion -->
+
+<!-- #region - Sensors -->
+
+<!-- camera -->
+  <gazebo reference="left_camera">
+    <sensor type="camera" name="left_camera">
+      <update_rate>15.0</update_rate>
+      <camera name="left">
+
+          <pose>0 0 0 0 0 0</pose>
+
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>nefive/leftcamera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>left_camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>  
+  
+  <gazebo reference="right_camera">
+    <sensor type="camera" name="right_camera">
+      <update_rate>15.0</update_rate>
+      <camera name="right">
+
+          <pose>0 0 0 0 0 0</pose>
+
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>320</width>
+          <height>240</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>nefive/rightcamera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>right_camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
 
 <!-- #endregion -->
 
