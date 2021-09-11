@@ -3,11 +3,15 @@
     <include file="$(find nefive-core)/launch/spawn_urdf.launch">
         <arg name="x" value="0.0" />
         <arg name="y" value="0.0" />
-        <arg name="z" value="0.2" />
+        <arg name="z" value="0.0" />
         <arg 
             name="urdf_robot_file"
             value="$(find nefive-core)/urdf/nefive-unity.urdf"
         />
         <arg name="robot_name" value="nefive" />
     </include>
+
+    <param name="robot_description" command="cat $(find nefive-core)/urdf/nefive-unity.urdf" />
+
+    <param name="/use_sim_time" value="true"/>
 </launch>
