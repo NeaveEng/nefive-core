@@ -886,13 +886,13 @@
     <child link="front_right_wheel" />
     <axis xyz="0 1 0" />
   </joint>
-  <joint name="base_link_rear_right_idler_joint" type="continuous">
+  <joint name="base_link_rear_right_idler_joint" type="fixed">
     <origin xyz="-0.0402 -0.078 0.0271" />
     <parent link="chassis" />
     <child link="rear_right_idler" />
     <axis xyz="0 1 0" />
   </joint>
-  <joint name="base_link_rear_left_idler_joint" type="continuous">
+  <joint name="base_link_rear_left_idler_joint" type="fixed">
     <origin xyz="-0.0402 0.078 0.0271" />
     <parent link="chassis" />
     <child link="rear_left_idler" />
@@ -1117,7 +1117,7 @@
 <!-- #region - Transmissions -->
 
 <!-- wheels -->
-<transmission name="left_wheel_transmission">
+<transmission name="rear_left_wheel_transmission">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="base_link_rear_left_wheel_joint">
     <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>  
@@ -1128,12 +1128,34 @@
   </actuator>
 </transmission>
 
-<transmission name="right_wheel_transmission">
+<transmission name="rear_right_wheel_transmission">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="base_link_rear_right_wheel_joint">
     <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>  
   </joint>
   <actuator name="right_wheel_actuator">
+    <mechanicalReduction>7</mechanicalReduction>
+    <hardwareInterface>VelocityJointInterface</hardwareInterface>
+  </actuator>
+</transmission>
+
+<transmission name="front_left_wheel_transmission">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="base_link_front_left_wheel_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>  
+  </joint>
+  <actuator name="front_left_wheel_actuator">
+    <mechanicalReduction>7</mechanicalReduction>
+    <hardwareInterface>VelocityJointInterface</hardwareInterface>
+  </actuator>
+</transmission>
+
+<transmission name="front_right_wheel_transmission">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="base_link_front_right_wheel_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>  
+  </joint>
+  <actuator name="front_right_wheel_actuator">
     <mechanicalReduction>7</mechanicalReduction>
     <hardwareInterface>VelocityJointInterface</hardwareInterface>
   </actuator>
@@ -1333,9 +1355,7 @@
     <sensor type="camera" name="left_camera">
       <update_rate>15.0</update_rate>
       <camera name="left">
-
-          <pose>0 0 0 0 0 0</pose>
-
+        <pose>0 0 0 0 0 0</pose>
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
           <width>320</width>
@@ -1372,9 +1392,7 @@
     <sensor type="camera" name="right_camera">
       <update_rate>15.0</update_rate>
       <camera name="right">
-
-          <pose>0 0 0 0 0 0</pose>
-
+        <pose>0 0 0 0 0 0</pose>
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
           <width>320</width>
